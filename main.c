@@ -13,7 +13,7 @@ void ConfiguraUART0(void){
 	// Velocidad 19200bps (Fsysclk = 16MHz)
 	UART0_IBRD_R = (UART0_IBRD_R & 0xFFFF0000) | 52;
 	UART0_FBRD_R = (UART0_FBRD_R & 0xFFFFFFC0) | 5;
-	// 8, N, 2, FIFOs habilitados
+	// 8, O, 2, FIFOs habilitados
 	UART0_LCRH_R = (UART0_LCRH_R & 0xFFFFFF00) | 0x7A;
 	// Habilitamos el UART0
 	UART0_CTL_R |= UART_CTL_UARTEN;
@@ -100,75 +100,73 @@ void ftoa(float valor){
 		n = valor * 1000;
 
 	GuardarDato = n/1000000000;
-	if (GuardarDato != 0){
+	if (GuardarDato != 0 | m != 0){
 		Datos[m] = GuardarDato + 48; 				// Millones
 		m++;
 	}
 		n = n%1000000000; 							// n ahora esta entre 0.000 y 999999.999
 
 	GuardarDato = n/100000000;
-	if (GuardarDato != 0){
+	if (GuardarDato != 0 | m != 0){
 		Datos[m] = GuardarDato + 48; 				// Centenas de miles
 		m++;
 	}
 		n = n%100000000; 							// n ahora esta entre 0.000 y 99999.999
 
 	GuardarDato = n/10000000;
-	if (GuardarDato != 0){
+	if (GuardarDato != 0 | m != 0){
 		Datos[m] = GuardarDato + 48; 				// Decenas de miles
 		m++;
 	}
 		n = n%10000000; 							// n ahora esta entre 0.000 y 9999.999
 
 	GuardarDato = n/1000000;
-	if (GuardarDato != 0){
+	if (GuardarDato != 0 | m != 0){
 		Datos[m] = GuardarDato + 48; 				// Miles
 		m++;
 	}
 		n = n%1000000; 								// n ahora esta entre 0.000 y 999.999
 
 	GuardarDato = n/100000;
-	if (GuardarDato != 0){
+	if (GuardarDato != 0 | m != 0){
 		Datos[m] = GuardarDato + 48; 				// Centenas
 		m++;
 	}
 		n = n%100000; 								// n ahora esta entre 0.000 y 99.999
 
 	GuardarDato = n/10000;
-	if (GuardarDato != 0){
+	if (GuardarDato != 0 | m != 0){
 		Datos[m] = GuardarDato + 48; 				// Decenas
 		m++;
 	}
 		n = n%10000; 								// n ahora esta entre 0.000 y 9.999
 
 	GuardarDato = n/1000;
-	if (GuardarDato != 0){
+	if (GuardarDato != 0 | m != 0){
 		Datos[m] = GuardarDato + 48; 				// Unidades
 		m++;
 	}
 		n = n%1000;									// n ahora esta entre 0.000 y 0.999
 
-
+		Datos[m] = 46;								// Punto Decimal
+					m++;
 
 	GuardarDato = n/100;
-	if (GuardarDato != 0){
+	if (GuardarDato != 0 | m != 0){
 		Datos[m] = GuardarDato + 48; 				// Decimas
 		m++;
 	}
 		n = n%100;									// n ahora esta entre 0.000 y 0.099
 
-		Datos[m] = 46;								// Punto Decimal
-			m++;
-
 	GuardarDato = n/10;
-	if (GuardarDato != 0){
+	if (GuardarDato != 0 | m != 0){
 		Datos[m] = GuardarDato + 48; 				// Centesimas
 		m++;
 	}
 		n = n%10; 									// n ahora esta entre 0.000 y 0.009
 
 	GuardarDato = n;
-	if (GuardarDato != 0){
+	if (GuardarDato != 0 | m != 0){
 		Datos[m] = GuardarDato + 48;				// Milesima
 	}
 }
